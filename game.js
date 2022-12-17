@@ -1,5 +1,6 @@
 const mazeHeight = 400;
 const mazeWidth = 400;
+const canvas = document.getElementById('gameCanvas');
 let playerX = Math.floor(Math.random() * mazeWidth);
 let playerY = Math.floor(Math.random() * mazeHeight);
 const ctx = canvas.getContext('2d');
@@ -17,9 +18,9 @@ async function generateMaze() {
 
   // Initialize the maze with all walls
   const maze = [];
-  for (let y = 0; y < mazeHeight; y++) {
+  for (let y = 0; y < 5; y++) {
     maze.push([]);
-    for (let x = 0; x < mazeWidth; x++) {
+    for (let x = 0; x < 5; x++) {
       maze[y].push('#');
     }
   }
@@ -31,8 +32,8 @@ async function generateMaze() {
   let exitY = 0;
 
   // Iterate through the cells to build the maze
-  for (let y = 0; y < mazeHeight; y++) {
-    for (let x = 0; x < mazeWidth; x++) {
+  for (let y = 0; y < 5; y++) {
+    for (let x = 0; x < 5; x++) {
       const cell = cells[y][x];
 
       if (!(cell & cellBit.block)) {
@@ -60,6 +61,7 @@ async function generateMaze() {
 
   return maze;
 }
+
 
 // Draw the maze and player on the canvas
 function draw(maze) {
@@ -113,7 +115,7 @@ document.addEventListener('keydown', event => {
     if (maze[playerY - 1][playerX] !== '#') {
       playerY--;
     }
-   } else if (event.key === 'ArrowDown') {
+  } else if (event.key === 'ArrowDown') {
     if (maze[playerY + 1][playerX] !== '#') {
       playerY++;
     }
